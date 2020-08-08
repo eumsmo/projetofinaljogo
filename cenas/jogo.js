@@ -17,36 +17,8 @@ export default class CenaJogo extends Phaser.Scene {
 
     create(){
         
-        const pizzas = {
-            _config:{
-                tipo: "sequencial",
-                fim_sequencia: "repetir",
-                cond_termino: {
-                    min_ataques: 5
-                }
-            },
-            ataques: {
-                pizza: { // controle de grupos
-                    _config:{
-                        tipo: "unico"
-                    },
-                    sprite: "pizza",
-                    w: 64, h: 64,
-                    x: cena => cena.w, y: 100,
-                    vida: 5,
-                    movimentos: [
-                        {
-                            nome: "senoide",
-                            divisor: 40,
-                            multiplicador: 20,
-                            velocidadeX: -280
-                        }
-                    ]
-                }
-            },
-            sequencia: ["pizza"]
-        }
-
+        const fase = this.cache.json.get("fase");
+        console.log(fase);
 
         const canvas_width = this.sys.canvas.width;
         const canvas_height = this.sys.canvas.height;
@@ -62,8 +34,8 @@ export default class CenaJogo extends Phaser.Scene {
         this.teclas = this.input.keyboard.createCursorKeys();
 
 
-        let grupoCena = Ataque.parseInformation(this, pizzas);
-        window["a"] = grupoCena;
+        let grupoCena = Ataque.parseInformation(this, fase);
+        window["grupo"] = grupoCena;
         grupoCena.comecar();
     }
 

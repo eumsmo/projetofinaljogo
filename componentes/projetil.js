@@ -4,10 +4,16 @@ import {Movimentos} from "./movimento.js"
 export default class Projetil extends Phaser.Physics.Arcade.Image {
 
     static parseValoresDinamicos(cena_tam, { x, y, w, h } = {}) {
-        if (x instanceof Function) x = x(cena_tam);
-        if (y instanceof Function) y = y(cena_tam);
-        if (w instanceof Function) w = w(cena_tam);
-        if (h instanceof Function) h = h(cena_tam);
+        const pre_functions = {
+            largura_tela(tela){return tela.w},
+            altura_tela(tela){return tela.h},
+        };
+
+        [x,y,w,h] = [x,y,w,h].map(val=>{
+            if (val instanceof Function) return val(cena_tam);
+            else if(val in pre_functions) return pre_functions[val](cena_tam);
+            return val;
+        });
 
         return { x, y, w, h }
     }

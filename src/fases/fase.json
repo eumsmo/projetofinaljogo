@@ -1,0 +1,29 @@
+{
+    "_config": {
+                "tipo": "sequencial",
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 5
+        }
+    },
+    "ataques": {
+        "pizza": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "pizza",
+            "w": 64, "h": 64,
+            "x": "largura_tela", "y": 100,
+            "vida": 5,
+            "movimentos": [
+                {
+                    "nome": "senoide",
+                    "divisor": 40,
+                    "multiplicador": 20,
+                    "velocidadeX": -280
+                }
+            ]
+        }
+    },
+            "sequencia": [ "pizza"]
+}
