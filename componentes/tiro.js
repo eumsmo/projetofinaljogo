@@ -1,50 +1,43 @@
-export class Tiro extends Phaser.Physics.Arcade.Image{
-    constructor(cena, x, y, dano=1){
-        super(cena, x, y, "tiro");
+import Projetil from "./projetil.js"
 
-        this.cena = cena;
-        this.identi = Math.random();
-
+export class Tiro extends Projetil{
+    constructor(cena, x, y, dano=1){        
         const tam = { w: 18, h: 18 };
-        this.tam = tam;
 
-        //this.setCollideWorldBounds(true);
-        const scale = Math.max(tam.w / this.width, tam.h / this.height);
-        this.setScale(scale);
-
+        super(cena, x, y, "tiro", tam);
+        
         this.dano = 1;
     }
 
-    foraDaTela() {
-        return this.x + this.tam.w / 2 > this.cena.cameras.main.width;
+    foraDaTela(){
+        return this.x > this.cena_tam.w + this.tamanho.w/2;
     }
 
     update(){
         this.setVelocityX(280);
 
-        if(this.foraDaTela())
-            this.destruir();
+        super.update();
     }
 
     aparecer(){
-        this.setActive(true);
+        super.aparecer();
         this.setVisible(true);
     }
 
     destruir(){
-        this.setActive(false);
+        super.destruir();
         this.setVisible(false);
     }
 }
 
 export class Atirador{
-    constructor(cena, sprite, tps=1000, dano=1){
+    constructor(cena, sprite, tps=1000, classeTiro = Tiro){
         this.cena = cena;
         this.tiros_por_segundo = tps;
-        this.dano = dano;
         this.sprite = sprite;
+        this.classeTiro = classeTiro;
 
-        this.grupo = cena.physics.add.group({ classType: Tiro, maxSize: 50, runChildUpdate: true });
+        this.grupo = cena.physics.add.group({ classType: classeTiro, maxSize: 50, runChildUpdate: true });
         this.cooldown = false;
     }
 
