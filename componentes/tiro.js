@@ -2,7 +2,7 @@ import Projetil from "./projetil.js"
 
 export class Tiro extends Projetil{
     constructor(cena, x, y, dano=1){        
-        const tam = { w: 18, h: 18 };
+        const tam = { w: 24, h: 24 };
 
         super(cena, x, y, "tiro", tam);
         
@@ -14,7 +14,7 @@ export class Tiro extends Projetil{
     }
 
     update(){
-        this.setVelocityX(280);
+        this.setVelocityX(800);
 
         super.update();
     }
@@ -37,7 +37,7 @@ export class Atirador{
         this.sprite = sprite;
         this.classeTiro = classeTiro;
 
-        this.grupo = cena.physics.add.group({ classType: classeTiro, maxSize: 50, runChildUpdate: true });
+        this.grupo = cena.physics.add.group({ classType: classeTiro, runChildUpdate: true });
         this.cooldown = false;
     }
 

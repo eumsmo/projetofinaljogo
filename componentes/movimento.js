@@ -31,3 +31,29 @@ const senoideLinearParaEsquerda = {
 }
 
 Movimentos.cadastrar("senoide", senoideLinearParaEsquerda);
+
+
+const praCima = {
+    variaveis: {fase: 1},
+    update(sprite) {
+        const cena_tam = sprite.cena_tam;
+        
+        if(this.variaveis.fase==1){
+            this.movimentoPraCima(sprite);
+            if (sprite.y < cena_tam.h-50) this.variaveis.fase = 2;
+        } else if (this.variaveis.fase == 2){
+            this.movimentoPraBaixo(sprite);
+            if (sprite.y > cena_tam.h + sprite.h) this.variaveis.fase = 1;
+        }
+    },
+    movimentoPraCima(sprite){
+        const velocidadeY = -480;
+        sprite.setVelocityY(velocidadeY);
+    },
+    movimentoPraBaixo(sprite){
+        const velocidadeY = 480;
+        sprite.setVelocityY(velocidadeY);
+    }
+}
+
+Movimentos.cadastrar("cima", praCima);

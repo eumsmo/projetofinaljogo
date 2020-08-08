@@ -59,6 +59,8 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
 
         this.x = x;
         this.y = y;
+        this.h = h;
+        this.w = w;
 
         this.tamanho = sprite_tam;
 
@@ -76,8 +78,7 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
         if (movimentos) {
             for(let movimento of movimentos){
                 
-                let movimento_obj = ("nome" in movimento) ? Movimentos.pegar(movimento.nome) : movimento;
-                movimento_obj.variaveis = movimento;
+                let movimento_obj = ("nome" in movimento) ? Movimentos.pegar(movimento.nome, movimento) : movimento;
 
 
                 if ("create" in movimento_obj)

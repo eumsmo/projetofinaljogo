@@ -7,7 +7,7 @@ export default class Jogador {
         this.scene_w = this.cena.cameras.main.width;
         this.scene_h = this.cena.cameras.main.width;
 
-        const tam = { w: 64, h: 64 }
+        const tam = { w: 96, h: 96 }
         this.tam = tam;
         this.sprite = cena.physics.add.image(0, this.scene_h/2, "cadeira");
         this.sprite.setCollideWorldBounds(true);
@@ -52,13 +52,13 @@ export default class Jogador {
     }
 
     inputTeclado(teclas){
-        const vHorizontal = 240;
-        const vVertical = 240;
+        const vHorizontal = 320;
+        const vVertical = 320;
 
         const jogador = this.sprite;
 
         if (teclas.left.isDown) {
-            jogador.setVelocityX(-(vHorizontal *2/3));
+            jogador.setVelocityX(-(vHorizontal));
         }
         else if (teclas.right.isDown) {
             jogador.setVelocityX(vHorizontal);

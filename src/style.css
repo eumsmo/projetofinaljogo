@@ -1,0 +1,9 @@
+#jogo{
+    width: 960px;
+    height: 540px;
+}
+
+#jogo canvas{
+    width: 100%;
+    height: 100%;
+}

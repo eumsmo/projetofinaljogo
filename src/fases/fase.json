@@ -23,7 +23,23 @@
                     "velocidadeX": -280
                 }
             ]
+        },
+        "garfo": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "garfo",
+            "w": 59,
+            "h": 300,
+            "x": 300,
+            "y": "altura_tela",
+            "vida": 5,
+            "movimentos": [
+                {
+                    "nome": "cima"
+                }
+            ]
         }
     },
-            "sequencia": [ "pizza"]
+            "sequencia": ["garfo", "pizza"]
 }

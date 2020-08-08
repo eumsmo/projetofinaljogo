@@ -3,8 +3,8 @@ import CenaJogo from "./cenas/jogo.js"
 
 const config = {
     tpe: Phaser.AUTO,
-    width: 800,
-    height: 480,
+    width: 1024,
+    height: 512,
     parent: "jogo",
     scene: [
         CenaCarregamento,

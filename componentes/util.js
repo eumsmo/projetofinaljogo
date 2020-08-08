@@ -10,7 +10,11 @@ export function gerenciadorCadastramento() {
         },
         pegar(nome, props={}) {
             if (!(nome in cadastros)) return null;
-            else return Object.assign({ variaveis: props }, cadastros[nome]);
+            else {
+                let obj = Object.assign({}, cadastros[nome]);
+                obj.variaveis = Object.assign(props, obj.variaveis);
+                return obj;
+            }
         },
         remover(nome) {
             if (!(nome in cadastros)) return null;
