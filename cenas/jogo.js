@@ -136,7 +136,7 @@ export default class CenaJogo extends Phaser.Scene {
         this.anims.create({
             key: 'circulo',
             frames: frames,
-            frameRate: 10,
+            frameRate: 30,
         });
         
         let mostrar = this.add.sprite(this.cw / 2, this.ch / 2, "efeito-circulo-16");
