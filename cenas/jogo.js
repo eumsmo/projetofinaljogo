@@ -71,6 +71,10 @@ export default class CenaJogo extends Phaser.Scene {
         let grupoCena = Ataque.parseInformation(this, fase.ataque_inicial);
         window["grupo"] = grupoCena;
         grupoCena.comecar();
+
+        window["ultimo_ataque_tempo"] = Date.now();
+        window["primeiro_ataque"] = false;
+        this.cooldown_ataque = false;
     }
 
     cria_template_grupo(template){
@@ -99,6 +103,11 @@ export default class CenaJogo extends Phaser.Scene {
         this.jogador.inputTeclado(this.teclas);
 
         this.gerencia_fundo();
+
+        if (Date.now() - window["ultimo_ataque_tempo"] >= 3000 && window["primeiro_ataque"]) {
+            window["grupo"]._run();
+            window["primeiro_ataque"] = false;
+        }
     }
 
     colidiuMesmo(obj1,obj2){
@@ -134,7 +143,8 @@ export default class CenaJogo extends Phaser.Scene {
         mostrar.displayWidth = this.cw;
         mostrar.displayHeight = this.ch;
         mostrar.on('animationcomplete', () => {
-            this.scene.start("CenaMenuInicial");
+            window.location.reload();
+            //this.scene.start("CenaMenuInicial");
         }, this);
 
         setTimeout(() => mostrar.play("circulo"), 500);

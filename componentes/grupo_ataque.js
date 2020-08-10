@@ -5,6 +5,14 @@ export const Ataques = {
 
 }
 
+function assignSemCampos(campos=[],target={},source={}){
+    for(let campo in source){
+        if (campos.includes(campo)) continue;
+        else target[campo] = source[campo];
+    }
+    return target;
+}
+
 export class Ataque{
     constructor(cena){
         this.cena = cena;
@@ -22,6 +30,7 @@ export class Ataque{
     // Sobreescrever esse método (chamar o super)
     terminar(){
         if(this.terminou) return false;
+        console.log("ssssss");
 
         this._status = 2;
         
@@ -35,7 +44,9 @@ export class Ataque{
     get terminou(){return this._status == 2;}
 
     static parseInformation(cena, nome){
-        const informacoes = Ataques[nome];
+        let informacoes = this.pegarInformacoes(nome);
+    
+
         const configuracoes = informacoes._config;
         const tipo = configuracoes.tipo;
 
@@ -52,6 +63,26 @@ export class Ataque{
         } else if (tipo == "aleatorio") {
 
         }
+    }
+
+    static pegarInformacoes(nome){
+        let informacoes = Ataques[nome];
+        if (informacoes._mod) {
+            let modificacoes = informacoes;
+            informacoes = this.pegarInformacoes(informacoes._mod);
+            informacoes = Object.assign({}, informacoes);
+
+            if (modificacoes._config)
+                Object.assign(informacoes._config, modificacoes._config);
+
+            if (modificacoes.movimentos) {
+                if (!informacoes.movimentos) informacoes.movimentos = [];
+                informacoes.movimentos.push(...modificacoes.movimentos);
+            }
+
+            informacoes = assignSemCampos(["_config", "movimentos"], informacoes, modificacoes);
+        }
+        return informacoes;
     }
 }
 
@@ -114,7 +145,7 @@ export class GrupoAtaque extends Ataque{
                 this.cond_termino.push(condicao);
         }
 
-       
+        this._ultimoAtaque = null;
 
         this._run = this._run.bind(this);
         this._fimDeUmAtaque = this._fimDeUmAtaque.bind(this);
@@ -144,7 +175,11 @@ export class GrupoAtaque extends Ataque{
             return this.terminar();
 
         let promesa = ataque.comecar();
+        this._ultimoAtaque = ataque;
         this._novoAtaque();
+
+        window["ultimo_ataque_tempo"] = Date.now();
+        window["primeiro_ataque"] = true;
 
         if (this.cooldown_ataque != null && !isNaN(this.cooldown_ataque)) { // Se cooldown_ataque for um numero
 
@@ -174,8 +209,9 @@ export class GrupoAtaque extends Ataque{
     _fimDeUmAtaque(){
         if(this.cond_checar == "fim_ataque"){
            for(let condicao of this.cond_termino)
-               if (condicao.checar(this))
-                return this.terminar(true);
+               if (condicao.checar(this)){
+                   return this.terminar(true);
+               }
            
         }
     }
@@ -240,6 +276,7 @@ export class GrupoSequencial extends GrupoAtaque{
             this.posicao_atual++;
         }
 
+        console.log(this._proximo_ataque);
         return this._proximo_ataque;
     }
 

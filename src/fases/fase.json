@@ -2,11 +2,74 @@
     "ataques_disponiveis": {
         "fase": {
             "_config": {
-                "tipo": "sequencial",
-                "fim_sequencia": "repetir"
+                "tipo": "sequencial"
             },
-            "ataques": ["pizza","garfo","ataque_vinho"],
-            "sequencia": ["ataque_vinho"]
+            "ataques": ["parte1","parte2","parte3"],
+            "sequencia": ["parte1","parte2","parte3"]
+        },
+        "parte1":{
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 1500,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 7,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "sequencia": ["ataque_prato"]
+        },
+        "parte2": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 750,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 30,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "ataques": ["faca-direita-1","faca-direita-2","faca-direita-3","faca-direita-4","faca-direita-5","faca-direita-6","faca-direita-7", "ataque_prato", "ataque_prato"]
+        },
+        "parte3": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 750,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 30,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "ataques": ["faca-direita-2","faca-direita-4","faca-direita-6", "ataque_prato", "ataque_prato", "ataque_prato", "ataque_vinho", "ataque_vinho"]
+        },
+        "faca-direita-1":{
+            "_mod": "faca-direita",
+            "y": 100
+        },
+        "faca-direita-2": {
+            "_mod": "faca-direita",
+            "y": 200
+        },
+        "faca-direita-3": {
+            "_mod": "faca-direita",
+            "y": 300
+        },
+        "faca-direita-4": {
+            "_mod": "faca-direita",
+            "y": 400
+        },
+        "faca-direita-5": {
+            "_mod": "faca-direita",
+            "y": 500
+        },
+        "faca-direita-6": {
+            "_mod": "faca-direita",
+            "y": 600
+        },
+        "faca-direita-7": {
+            "_mod": "faca-direita",
+            "y": 700
         },
         "pizza": {
             "_config": {
@@ -43,18 +106,18 @@
                 }
             ]
         },
-        "prato-cima": {
+        "prato": {
             "_config": {
                 "tipo": "unico"
             },
             "sprite": "prato",
             "w": 192,
             "x": "largura_tela",
-            "y": 75,
-            "vida": 5,
+            "vida": 2,
             "movimentos": [
                 {
-                    "nome": "senoide"
+                    "nome": "senoide",
+                    "velocidadeX": -600
                 },
                 {
                     "nome": "rodando",
@@ -64,50 +127,18 @@
                     "nome": "projetil-cache-ondeath"
                 }
             ]
+        },
+        "prato-cima": {
+            "_mod": "prato",
+            "y": 125
         },
         "prato-meio": {
-            "_config": {
-                "tipo": "unico"
-            },
-            "sprite": "prato",
-            "w": 192,
-            "x": "largura_tela",
-            "y": 250,
-            "vida": 5,
-            "movimentos": [
-                {
-                    "nome": "senoide"
-                },
-                {
-                    "nome": "rodando",
-                    "velocidade": -3
-                },
-                {
-                    "nome": "projetil-cache-ondeath"
-                }
-            ]
+            "_mod": "prato",
+            "y": 384
         },
         "prato-baixo": {
-            "_config": {
-                "tipo": "unico"
-            },
-            "sprite": "prato",
-            "w": 192,
-            "x": "largura_tela",
-            "y": 425,
-            "vida": 5,
-            "movimentos": [
-                {
-                    "nome": "senoide"
-                },
-                {
-                    "nome": "rodando",
-                    "velocidade": -3
-                },
-                {
-                    "nome": "projetil-cache-ondeath"
-                }
-            ]
+            "_mod": "prato",
+            "y": 643
         },
         "posicao_prato": {
             "_config": {
@@ -118,16 +149,19 @@
             },
             "ataques": ["prato-cima","prato-meio","prato-baixo"]
         },
-        "prato-ec": {
+        "pedaco-prato": {
             "_config": {
                 "tipo": "unico"
             },
-            "sprite": "prato-ec",
             "w": 96,
             "x": "x-cache",
             "y": "y-cache",
             "vida": 5,
-            "foraDaTela": "todas",
+            "foraDaTela": "todas"
+        },
+        "prato-ec": {
+            "_mod": "pedaco-prato",
+            "sprite": "prato-ec",
             "movimentos": [
                 {
                     "nome": "simples",
@@ -137,15 +171,8 @@
             ]
         },
         "prato-dc": {
-            "_config": {
-                "tipo": "unico"
-            },
+            "_mod": "pedaco-prato",
             "sprite": "prato-dc",
-            "w": 96,
-            "x": "x-cache",
-            "y": "y-cache",
-            "vida": 5,
-            "foraDaTela": "todas",
             "movimentos": [
                 {
                     "nome": "simples",
@@ -155,15 +182,8 @@
             ]
         },
         "prato-eb": {
-            "_config": {
-                "tipo": "unico"
-            },
+           "_mod": "pedaco-prato",
             "sprite": "prato-eb",
-            "w": 96,
-            "x": "x-cache",
-            "y": "y-cache",
-            "vida": 5,
-            "foraDaTela": "todas",
             "movimentos": [
                 {
                     "nome": "simples",
@@ -173,15 +193,8 @@
             ]
         },
         "prato-db": {
-            "_config": {
-                "tipo": "unico"
-            },
+            "_mod": "pedaco-prato",
             "sprite": "prato-db",
-            "w": 96,
-            "x": "x-cache",
-            "y": "y-cache",
-            "vida": 5,
-            "foraDaTela": "todas",
             "movimentos": [
                 {
                     "nome": "simples",
