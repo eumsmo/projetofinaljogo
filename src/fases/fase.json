@@ -1,0 +1,567 @@
+{
+    "ataques_disponiveis": {
+        "fase": {
+            "_config": {
+                "tipo": "sequencial"
+            },
+            "ataques": ["parte1","parte2","parte3"],
+            "sequencia": ["parte1","parte2","parte3"]
+        },
+        "parte1":{
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 1500,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 7,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "sequencia": ["ataque_prato"]
+        },
+        "parte2": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 750,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 30,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "ataques": ["faca-direita-1","faca-direita-2","faca-direita-3","faca-direita-4","faca-direita-5","faca-direita-6","faca-direita-7", "ataque_prato", "ataque_prato"]
+        },
+        "parte3": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 750,
+                "fim_sequencia": "repetir",
+                "cond_termino": {
+                    "min_ataques": 30,
+                    "cond_checar": "fim_ataque"
+                }
+            },
+            "ataques": ["faca-direita-2","faca-direita-4","faca-direita-6", "ataque_prato", "ataque_prato", "ataque_prato", "ataque_vinho", "ataque_vinho"]
+        },
+        "faca-direita-1":{
+            "_mod": "faca-direita",
+            "y": 100
+        },
+        "faca-direita-2": {
+            "_mod": "faca-direita",
+            "y": 200
+        },
+        "faca-direita-3": {
+            "_mod": "faca-direita",
+            "y": 300
+        },
+        "faca-direita-4": {
+            "_mod": "faca-direita",
+            "y": 400
+        },
+        "faca-direita-5": {
+            "_mod": "faca-direita",
+            "y": 500
+        },
+        "faca-direita-6": {
+            "_mod": "faca-direita",
+            "y": 600
+        },
+        "faca-direita-7": {
+            "_mod": "faca-direita",
+            "y": 700
+        },
+        "pizza": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "pizza",
+            "w": 96,
+            "h": 96,
+            "x": "largura_tela",
+            "y": 100,
+            "vida": 5,
+            "movimentos": [
+                {
+                    "nome": "senoide",
+                    "divisor": 40,
+                    "multiplicador": 20,
+                    "velocidadeX": -420
+                }
+            ]
+        },
+        "garfo": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "garfo",
+            "w": 59,
+            "h": 300,
+            "x": 300,
+            "y": "altura_tela",
+            "vida": 5,
+            "movimentos": [
+                {
+                    "nome": "cima"
+                }
+            ]
+        },
+        "prato": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "prato",
+            "w": 192,
+            "x": "largura_tela",
+            "vida": 2,
+            "movimentos": [
+                {
+                    "nome": "senoide",
+                    "velocidadeX": -600
+                },
+                {
+                    "nome": "rodando",
+                    "velocidade": -3
+                },
+                {
+                    "nome": "projetil-cache-ondeath"
+                }
+            ]
+        },
+        "prato-cima": {
+            "_mod": "prato",
+            "y": 125
+        },
+        "prato-meio": {
+            "_mod": "prato",
+            "y": 384
+        },
+        "prato-baixo": {
+            "_mod": "prato",
+            "y": 643
+        },
+        "posicao_prato": {
+            "_config": {
+                "tipo": "sequencial",
+                "cond_termino": {
+                    "min_ataques": 1
+                }
+            },
+            "ataques": ["prato-cima","prato-meio","prato-baixo"]
+        },
+        "pedaco-prato": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "w": 96,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas"
+        },
+        "prato-ec": {
+            "_mod": "pedaco-prato",
+            "sprite": "prato-ec",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -420,
+                    "velocidadeY": -420
+                }
+            ]
+        },
+        "prato-dc": {
+            "_mod": "pedaco-prato",
+            "sprite": "prato-dc",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 420,
+                    "velocidadeY": -420
+                }
+            ]
+        },
+        "prato-eb": {
+           "_mod": "pedaco-prato",
+            "sprite": "prato-eb",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -420,
+                    "velocidadeY": 420
+                }
+            ]
+        },
+        "prato-db": {
+            "_mod": "pedaco-prato",
+            "sprite": "prato-db",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 420,
+                    "velocidadeY": 420
+                }
+            ]
+        },
+        "quebra_prato": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 0
+            },
+            "ataques": ["prato-ec","prato-dc","prato-eb","prato-db"]
+        },
+        "ataque_prato": {
+            "_config": {
+                "tipo": "sequencial"
+            },
+            "ataques": ["posicao_prato", "quebra_prato"],
+            "sequencia": ["posicao_prato", "quebra_prato"]
+        },
+        "faca-cima": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "faca-cima",
+            "w": 48,
+            "x": 200,
+            "y": "altura_tela",
+            "vida": 20,
+            "foraDaTela": "cima",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeY": -800
+                }
+            ]
+        },
+        "faca-baixo": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "faca-cima",
+            "w": 48,
+            "x": 200,
+            "y": 0,
+            "vida": 20,
+            "foraDaTela": "baixo",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeY": 800
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 180,
+                    "velocidade": 0
+                }
+            ]
+        },
+        "faca-esquerda": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "faca-lado",
+            "w": 48,
+            "x": 0,
+            "y": 100,
+            "vida": 20,
+            "foraDaTela": "direita",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 800
+                }
+            ]
+        },
+        "faca-direita": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "faca-lado",
+            "w": 48,
+            "x": "largura_tela",
+            "y": 100,
+            "vida": 20,
+            "foraDaTela": "esquerda",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -800
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 180,
+                    "velocidade": 0
+                }
+            ]
+        },
+        "ataque_faca": {
+            "_config": {
+                "tipo": "sequencial"
+            },
+            "ataques": ["faca-cima","faca-baixo","faca-esquerda","faca-direita"]
+        },
+        "ataque_vinho": {
+            "_config": {
+                "tipo": "sequencial"
+            },
+            "ataques": ["posicoes_vinho","gotas"],
+            "sequencia": ["posicoes_vinho","gotas"]
+        },
+        "posicoes_vinho": {
+            "_config": {
+                "tipo": "sequencial"
+            },
+            "ataques": ["vinho-cima","vinho-baixo"]
+        },
+        "vinho-cima": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "vinho",
+            "w": 48,
+            "x": "largura_tela",
+            "y": 128,
+            "vida": 3,
+            "foraDaTela": "esquerda",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -800
+                },
+                {
+                    "nome": "rodando",
+                    "velocidade": -15
+                },
+                {
+                    "nome": "projetil-cache-ondeath"
+                }
+            ]
+        },
+        "vinho-baixo": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "vinho",
+            "w": 48,
+            "x": "largura_tela",
+            "y": 394,
+            "vida": 3,
+            "foraDaTela": "esquerda",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -800
+                },
+                {
+                    "nome": "rodando",
+                    "velocidade": -15
+                },
+                {
+                    "nome": "projetil-cache-ondeath"
+                }
+            ]
+        },
+        "gotas": {
+            "_config": {
+                "tipo": "sequencial",
+                "cooldown_ataque": 0
+            },
+            "ataques": ["gota-cm", "gota-cd", "gota-dm", "gota-db", "gota-bm", "gota-be", "gota-em", "gota-ec"]
+        },
+        "gota-cm": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-baixo",
+            "w": 36,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 0,
+                    "velocidadeY": -420
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 180,
+                    "velocidade": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-cd": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-torta",
+            "w": 48,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 420,
+                    "velocidadeY": -420
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": -90,
+                    "velocidade": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-dm": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-lado",
+            "w": 36,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 420,
+                    "velocidadeY": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-db": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-torta",
+            "w": 48,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 420,
+                    "velocidadeY": 420
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-bm": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-baixo",
+            "w": 36,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": 0,
+                    "velocidadeY": 420
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-be": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-torta",
+            "w": 48,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -420,
+                    "velocidadeY": 420
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 90,
+                    "velocidade": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-em": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-lado",
+            "w": 36,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -420,
+                    "velocidadeY": 0
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 180,
+                    "velocidade": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        },
+        "gota-ec": {
+            "_config": {
+                "tipo": "unico"
+            },
+            "sprite": "gota-vinho-torta",
+            "w": 48,
+            "x": "x-cache",
+            "y": "y-cache",
+            "vida": 5,
+            "foraDaTela": "todas",
+            "movimentos": [
+                {
+                    "nome": "simples",
+                    "velocidadeX": -420,
+                    "velocidadeY": -420
+                },
+                {
+                    "nome": "rodando",
+                    "anguloInicial": 180,
+                    "velocidade": 0
+                },
+                {
+                    "nome": "gota"
+                }
+            ]
+        }
+    },
+    "ataque_inicial": "fase"
+}
