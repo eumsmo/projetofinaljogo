@@ -43,8 +43,8 @@ export default class CenaJogo extends Phaser.Scene {
         const distanciaQuadroHp = 16;
         const xQuadroHP = distanciaQuadroHp;
         const yQuadroHP = canvas_height - distanciaQuadroHp / 2;
-        const wQuadroHP = 100;
-        const hQuadroHP = 50;
+        const wQuadroHP = 150;
+        const hQuadroHP = 75;
 
 
         this.quadroHP = this.add.image(xQuadroHP, yQuadroHP, "quadro-hp");
@@ -52,7 +52,7 @@ export default class CenaJogo extends Phaser.Scene {
         this.quadroHP.displayHeight = hQuadroHP;
         this.quadroHP.displayWidth = wQuadroHP;
 
-        const estilo_texto = { fontSize: '32px', fill: '#000', fontFamily: 'OpenSans', align: 'center' };
+        const estilo_texto = { fontSize: '48px', fill: '#000', fontFamily: 'OpenSans', align: 'center' };
         this.textoHP = this.add.text(xQuadroHP + wQuadroHP/2, yQuadroHP - hQuadroHP/2, "HP. 3", estilo_texto);
         this.textoHP.setOrigin(0.5);
         //this.quadroHP.setSize(200, 100);

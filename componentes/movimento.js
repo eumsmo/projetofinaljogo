@@ -23,9 +23,9 @@ const senoideLinearParaEsquerda = {
     },
     update(sprite){
         const variaveis = this.variaveis;
-        let velocidadeX = variaveis.velocidadeX || -280,
-            divisor = variaveis.divisor || 40,
-            multiplicador = variaveis.multiplicador || 20;
+        let velocidadeX = variaveis.velocidadeX || -420,
+            divisor = variaveis.divisor || 60,
+            multiplicador = variaveis.multiplicador || 30;
 
         sprite.setVelocityX(velocidadeX);
         sprite.y = sprite.y_base + Math.cos(sprite.x / divisor) * multiplicador;

@@ -21,12 +21,12 @@ export default class CenaMenuInicial extends Phaser.Scene {
         fundo.displayWidth = canvas_width;
         window["fundo"]=fundo;
 
+        const distancia_texto = 48;
 
-        const estilo_texto = { fontSize: '24px', fill: '#fff', fontFamily: 'OpenSans', align: 'center' };
+        const estilo_texto = { fontSize: distancia_texto+'px', fill: '#fff', fontFamily: 'OpenSans', align: 'center' };
 
         const meio_w = canvas_width/2;
         const meio_h = canvas_height/2;
-        const distancia_texto = 24;
 
         const info_texto = {
             "start": {

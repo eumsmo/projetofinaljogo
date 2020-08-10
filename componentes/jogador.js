@@ -28,11 +28,11 @@ export default class Jogador {
         this.sprite.play('atirador');
 
         //const scale = Math.max(tam.w / this.sprite.width, tam.h / this.sprite.height);
-        this.sprite.setScale(0.33);
+        this.sprite.setScale(0.5);
 
         this.sprite.allowGravity = false;
 
-        this.atirador = new Atirador(cena, this, 150);
+        this.atirador = new Atirador(cena, this, 225);
 
         this.vida = 3;
         this.dano_cooldown = false;
@@ -62,8 +62,8 @@ export default class Jogador {
     }
 
     inputTeclado(teclas){
-        const vHorizontal = 320;
-        const vVertical = 320;
+        const vHorizontal = 480;
+        const vVertical = 480;
 
         const jogador = this.sprite;
         const var_angulo = 2.5;

@@ -5,8 +5,8 @@ import CenaMenuInicial from "./cenas/inicial.js"
 
 const config = {
     tpe: Phaser.AUTO,
-    width: 1024,
-    height: 512,
+    width: 1536,
+    height: 768,
     parent: "jogo",
     scene: [
         CenaPreCarregamento,

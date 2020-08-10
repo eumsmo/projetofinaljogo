@@ -9,7 +9,7 @@
                 "tipo": "unico"
             },
             "sprite": "pizza",
-            "w": 64, "h": 64,
+            "w": 96, "h": 96,
             "x": "largura_tela", "y": 100,
             "vida": 5,
             "movimentos": [
@@ -17,7 +17,7 @@
                     "nome": "senoide",
                     "divisor": 40,
                     "multiplicador": 20,
-                    "velocidadeX": -280
+                    "velocidadeX": -420
                 }
             ]
         },
@@ -55,7 +55,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato",
-                            "w": 128,
+                            "w": 192,
                             "x": "largura_tela",
                             "y": 75,
                             "vida": 5,
@@ -70,7 +70,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato",
-                            "w": 128,
+                            "w": 192,
                             "x": "largura_tela",
                             "y": 250,
                             "vida": 5,
@@ -85,7 +85,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato",
-                            "w": 128,
+                            "w": 192,
                             "x": "largura_tela",
                             "y": 425,
                             "vida": 5,
@@ -108,7 +108,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato-ec",
-                            "w": 64,
+                            "w": 96,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -116,8 +116,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": -280,
-                                    "velocidadeY": -280
+                                    "velocidadeX": -420,
+                                    "velocidadeY": -420
                                 }
                             ]
                         },
@@ -126,7 +126,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato-dc",
-                            "w": 64,
+                            "w": 96,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -134,8 +134,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": 280,
-                                    "velocidadeY": -280
+                                    "velocidadeX": 420,
+                                    "velocidadeY": -420
                                 }
                             ]
                         },
@@ -144,7 +144,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato-eb",
-                            "w": 64,
+                            "w": 96,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -152,8 +152,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": -280,
-                                    "velocidadeY": 280
+                                    "velocidadeX": -420,
+                                    "velocidadeY": 420
                                 }
                             ]
                         },
@@ -162,7 +162,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "prato-db",
-                            "w": 64,
+                            "w": 96,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -170,8 +170,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": 280,
-                                    "velocidadeY": 280
+                                    "velocidadeX": 420,
+                                    "velocidadeY": 420
                                 }
                             ]
                         }
@@ -190,7 +190,7 @@
                         "tipo": "unico"
                     },
                     "sprite": "faca-cima",
-                    "w": 32,
+                    "w": 48,
                     "x": 200,
                     "y": "altura_tela",
                     "vida": 20,
@@ -198,7 +198,7 @@
                     "movimentos": [
                         {
                             "nome": "simples",
-                            "velocidadeY": -400
+                            "velocidadeY": -800
                         }
                     ]
                 },
@@ -207,7 +207,7 @@
                         "tipo": "unico"
                     },
                     "sprite": "faca-cima",
-                    "w": 32,
+                    "w": 48,
                     "x": 200,
                     "y": 0,
                     "vida": 20,
@@ -215,7 +215,7 @@
                     "movimentos": [
                         {
                             "nome": "simples",
-                            "velocidadeY": 400
+                            "velocidadeY": 800
                         },
                         {
                             "nome": "rodando",
@@ -229,7 +229,7 @@
                         "tipo": "unico"
                     },
                     "sprite": "faca-lado",
-                    "w": 32,
+                    "w": 48,
                     "x": 0,
                     "y": 100,
                     "vida": 20,
@@ -237,7 +237,7 @@
                     "movimentos": [
                         {
                             "nome": "simples",
-                            "velocidadeX": 400
+                            "velocidadeX": 800
                         }
                     ]
                 },
@@ -246,7 +246,7 @@
                         "tipo": "unico"
                     },
                     "sprite": "faca-lado",
-                    "w": 32,
+                    "w": 48,
                     "x": "largura_tela",
                     "y": 100,
                     "vida": 20,
@@ -254,7 +254,7 @@
                     "movimentos": [
                         {
                             "nome": "simples",
-                            "velocidadeX": -400
+                            "velocidadeX": -800
                         },
                         {
                             "nome": "rodando",
@@ -280,13 +280,13 @@
                                 "tipo": "unico"
                             },
                             "sprite": "vinho",
-                            "w": 32,
+                            "w": 48,
                             "x": "largura_tela",
                             "y": 128,
                             "vida": 3,
                             "foraDaTela": "esquerda",
                             "movimentos": [
-                                {"nome": "simples", "velocidadeX": -400},
+                                {"nome": "simples", "velocidadeX": -800},
                                 {"nome": "rodando", "velocidade": -15},
                                 {"nome": "projetil-cache-ondeath"}
                             ]
@@ -296,13 +296,13 @@
                                 "tipo": "unico"
                             },
                             "sprite": "vinho",
-                            "w": 32,
+                            "w": 48,
                             "x": "largura_tela",
                             "y": 394,
                             "vida": 3,
                             "foraDaTela": "esquerda",
                             "movimentos": [
-                                {"nome": "simples", "velocidadeX": -400},
+                                {"nome": "simples", "velocidadeX": -800},
                                 {"nome": "rodando", "velocidade": -15},
                                 {"nome": "projetil-cache-ondeath"}
                             ]
@@ -320,7 +320,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-baixo",
-                            "w": 24,
+                            "w": 36,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -329,7 +329,7 @@
                                 {
                                     "nome": "simples",
                                     "velocidadeX": 0,
-                                    "velocidadeY": -280
+                                    "velocidadeY": -420
                                 },
                                 {
                                     "nome": "rodando",
@@ -344,7 +344,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-torta",
-                            "w": 32,
+                            "w": 48,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -352,8 +352,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": 280,
-                                    "velocidadeY": -280
+                                    "velocidadeX": 420,
+                                    "velocidadeY": -420
                                 },
                                 {
                                     "nome": "rodando",
@@ -368,7 +368,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-lado",
-                            "w": 24,
+                            "w": 36,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -376,7 +376,7 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": 280,
+                                    "velocidadeX": 420,
                                     "velocidadeY": 0
                                 },
                                 {"nome": "gota"}
@@ -387,7 +387,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-torta",
-                            "w": 32,
+                            "w": 48,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -395,8 +395,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": 280,
-                                    "velocidadeY": 280
+                                    "velocidadeX": 420,
+                                    "velocidadeY": 420
                                 },
                                 {"nome": "gota"}
                             ]
@@ -406,7 +406,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-baixo",
-                            "w": 24,
+                            "w": 36,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -415,7 +415,7 @@
                                 {
                                     "nome": "simples",
                                     "velocidadeX": 0,
-                                    "velocidadeY": 280
+                                    "velocidadeY": 420
                                 },
                                 {"nome": "gota"}
                             ]
@@ -425,7 +425,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-torta",
-                            "w": 32,
+                            "w": 48,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -433,8 +433,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": -280,
-                                    "velocidadeY": 280
+                                    "velocidadeX": -420,
+                                    "velocidadeY": 420
                                 },
                                 {
                                     "nome": "rodando",
@@ -449,7 +449,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-lado",
-                            "w": 24,
+                            "w": 36,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -457,7 +457,7 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": -280,
+                                    "velocidadeX": -420,
                                     "velocidadeY": 0
                                 },
                                 {
@@ -473,7 +473,7 @@
                                 "tipo": "unico"
                             },
                             "sprite": "gota-vinho-torta",
-                            "w": 32,
+                            "w": 48,
                             "x": "x-cache",
                             "y": "y-cache",
                             "vida": 5,
@@ -481,8 +481,8 @@
                             "movimentos": [
                                 {
                                     "nome": "simples",
-                                    "velocidadeX": -280,
-                                    "velocidadeY": -280
+                                    "velocidadeX": -420,
+                                    "velocidadeY": -420
                                 },
                                 {
                                     "nome": "rodando",
