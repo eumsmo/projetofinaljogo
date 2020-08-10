@@ -1,6 +1,10 @@
 import Projetil from "./projetil.js";
 import Condicoes from "./condicao.js"
 
+export const Ataques = {
+
+}
+
 export class Ataque{
     constructor(cena){
         this.cena = cena;
@@ -30,7 +34,8 @@ export class Ataque{
     get comecou(){return this._status >= 1;}
     get terminou(){return this._status == 2;}
 
-    static parseInformation(cena, informacoes){
+    static parseInformation(cena, nome){
+        const informacoes = Ataques[nome];
         const configuracoes = informacoes._config;
         const tipo = configuracoes.tipo;
 
@@ -40,10 +45,10 @@ export class Ataque{
 
             return new AtaqueUnico(cena, template_name, informacoes);
         } else if (tipo == "sequencial") {
-            const ataques_disponiveis = informacoes.ataques;
+            const ataques = informacoes.ataques;
             const ordem = informacoes.sequencia;
 
-            return new GrupoSequencial(cena, ataques_disponiveis, configuracoes, ordem);
+            return new GrupoSequencial(cena, ataques, configuracoes, ordem);
         } else if (tipo == "aleatorio") {
 
         }
@@ -210,7 +215,7 @@ export class GrupoSequencial extends GrupoAtaque{
 
     comecar(){
         if(this.tipo == "sequencial aleatorio"){
-            let chaves = Object.keys(this.ataques_disponiveis);
+            let chaves = this.ataques_disponiveis;
             let ordem = GrupoSequencial.gerarVetorOrdem(chaves.length - 1);
             this.ordem = ordem.map(idx=> chaves[idx]);
         }
@@ -229,10 +234,9 @@ export class GrupoSequencial extends GrupoAtaque{
             if(this.posicao_atual>=this.ordem.length){
                 return null;
             }
-            let nome_ataque = this.ordem[this.posicao_atual],
-                info_ataque = this.ataques_disponiveis[nome_ataque];
+            let nome_ataque = this.ordem[this.posicao_atual];
 
-            this._proximo_ataque = Ataque.parseInformation(this.cena, info_ataque);
+            this._proximo_ataque = Ataque.parseInformation(this.cena, nome_ataque);
             this.posicao_atual++;
         }
 

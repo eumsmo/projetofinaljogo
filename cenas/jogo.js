@@ -1,5 +1,5 @@
-import Jogador from "../componentes/jogador.js"
-import {Ataque} from "../componentes/grupo_ataque.js"
+import Jogador from "../componentes/jogador.js";
+import { Ataque, Ataques} from "../componentes/grupo_ataque.js";
 import Projetil from "../componentes/projetil.js";
 
 export default class CenaJogo extends Phaser.Scene {
@@ -28,6 +28,8 @@ export default class CenaJogo extends Phaser.Scene {
         
         const fase = this.cache.json.get("fase");
         console.log(fase);
+
+        Object.assign(Ataques, fase.ataques_disponiveis);
 
         const canvas_width = this.sys.canvas.width;
         const canvas_height = this.sys.canvas.height;
@@ -66,7 +68,7 @@ export default class CenaJogo extends Phaser.Scene {
         this.teclas = this.input.keyboard.createCursorKeys();
 
 
-        let grupoCena = Ataque.parseInformation(this, fase);
+        let grupoCena = Ataque.parseInformation(this, fase.ataque_inicial);
         window["grupo"] = grupoCena;
         grupoCena.comecar();
     }
