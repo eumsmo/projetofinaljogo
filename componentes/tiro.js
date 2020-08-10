@@ -1,10 +1,10 @@
 import Projetil from "./projetil.js"
 
 export class Tiro extends Projetil{
-    constructor(cena, x, y, dano=1){        
+    constructor(cena, x, y, imagem_custom="tiro", dano=1){        
         const tam = { w: 24, h: 24 };
 
-        super(cena, x, y, "tiro", tam);
+        super(cena, x, y, imagem_custom || "tiro", tam);
         
         this.dano = 1;
     }
@@ -28,6 +28,25 @@ export class Tiro extends Projetil{
         super.destruir();
         this.setVisible(false);
     }
+}
+
+export class TiroForte extends Tiro {
+    constructor(cena, x, y) {
+        super(cena, x, y, "tiro-forte", 2);
+        this.x_base = x;
+    }
+
+    update(){
+        super.update();
+        if(this.x > this.x_base+250)
+            this.destruir();
+    }
+
+    aparecer(){
+        super.aparecer();
+        this.x_base = this.x;
+    }
+
 }
 
 export class Atirador{

@@ -42,31 +42,20 @@ export default class CenaJogo extends Phaser.Scene {
         //this.fundo.setScale(canvas_width / this.fundo.width);
         //this.fundo2.setScale(canvas_width / this.fundo2.width);
 
+
+        this.jogador = new Jogador(this);
+        
+
         const distanciaQuadroHp = 16;
         const xQuadroHP = distanciaQuadroHp;
         const yQuadroHP = canvas_height - distanciaQuadroHp / 2;
         const wQuadroHP = 150;
         const hQuadroHP = 75;
 
-
-        this.quadroHP = this.add.image(xQuadroHP, yQuadroHP, "quadro-hp");
-        this.quadroHP.setOrigin(0, 1);
-        this.quadroHP.displayHeight = hQuadroHP;
-        this.quadroHP.displayWidth = wQuadroHP;
-
-        const estilo_texto = { fontSize: '48px', fill: '#000', fontFamily: 'OpenSans', align: 'center' };
-        this.textoHP = this.add.text(xQuadroHP + wQuadroHP/2, yQuadroHP - hQuadroHP/2, "HP. 3", estilo_texto);
-        this.textoHP.setOrigin(0.5);
-        //this.quadroHP.setSize(200, 100);
-
-        this.jogador = new Jogador(this);
-        this.textoHP.setText("HP. " + this.jogador.vida);
-
         this.template_grupos = {};
         this.inimigos = this.physics.add.group();
 
         this.teclas = this.input.keyboard.createCursorKeys();
-
 
         let grupoCena = Ataque.parseInformation(this, fase.ataque_inicial);
         window["grupo"] = grupoCena;
@@ -75,6 +64,18 @@ export default class CenaJogo extends Phaser.Scene {
         window["ultimo_ataque_tempo"] = Date.now();
         window["primeiro_ataque"] = false;
         this.cooldown_ataque = false;
+
+        this.quadroHP = this.add.image(xQuadroHP, yQuadroHP, "quadro-hp");
+        this.quadroHP.setOrigin(0, 1);
+        this.quadroHP.displayHeight = hQuadroHP;
+        this.quadroHP.displayWidth = wQuadroHP;
+
+        const estilo_texto = { fontSize: '48px', fill: '#000', fontFamily: 'OpenSans', align: 'center' };
+        this.textoHP = this.add.text(xQuadroHP + wQuadroHP / 2, yQuadroHP - hQuadroHP / 2, "HP. 3", estilo_texto);
+        this.textoHP.setOrigin(0.5);
+        //this.quadroHP.setSize(200, 100);
+
+        this.textoHP.setText("HP. " + this.jogador.vida);
     }
 
     cria_template_grupo(template){
@@ -96,6 +97,7 @@ export default class CenaJogo extends Phaser.Scene {
 
     update(){
         this.physics.add.overlap(this.inimigos, this.jogador.atirador.grupo, this.colisao, this.colidiuMesmo);
+        this.physics.add.overlap(this.inimigos, this.jogador.atiradorForte.grupo, this.colisao, this.colidiuMesmo);
         this.physics.add.overlap(this.jogador.sprite, this.inimigos, ()=>this.colisaoJogador(), this.colidiuMesmo);
 
 
@@ -143,8 +145,8 @@ export default class CenaJogo extends Phaser.Scene {
         mostrar.displayWidth = this.cw;
         mostrar.displayHeight = this.ch;
         mostrar.on('animationcomplete', () => {
+            this.scene.start("CenaMenuInicial");
             window.location.reload();
-            //this.scene.start("CenaMenuInicial");
         }, this);
 
         setTimeout(() => mostrar.play("circulo"), 500);

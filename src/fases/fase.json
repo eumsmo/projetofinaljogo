@@ -4,7 +4,6 @@
             "_config": {
                 "tipo": "sequencial"
             },
-            "ataques": ["parte1","parte2","parte3"],
             "sequencia": ["parte1","parte2","parte3"]
         },
         "parte1":{
@@ -281,7 +280,7 @@
             "w": 48,
             "x": "largura_tela",
             "y": 100,
-            "vida": 20,
+            "vida": 5,
             "foraDaTela": "esquerda",
             "movimentos": [
                 {

@@ -24,7 +24,7 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
             h: cena.cameras.main.height
         };
 
-        
+        console.log(template);
 
         super(cena, 0, 0, template);
 

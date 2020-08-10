@@ -1,4 +1,4 @@
-import { Atirador } from "./tiro.js";
+import { Atirador, TiroForte, Tiro } from "./tiro.js";
 
 export default class Jogador {
     constructor(cena) {
@@ -32,10 +32,14 @@ export default class Jogador {
 
         this.sprite.allowGravity = false;
 
-        this.atirador = new Atirador(cena, this, 225);
+        this.atirador = new Atirador(cena, this, 225, Tiro);
+        this.atiradorForte = new Atirador(cena, this, 300, TiroForte);
+        this.atirador_atual = 1;
 
         this.vida = 3;
         this.dano_cooldown = false;
+
+        this.cooldown_muda_arma = false;
     }
 
     dano(){
@@ -70,6 +74,15 @@ export default class Jogador {
         const base_angulo = 2;
 
 
+        if (teclas.shift.isDown && !this.cooldown_muda_arma){
+            this.cooldown_muda_arma=true;
+            setTimeout(()=>this.cooldown_muda_arma=false,1000);
+
+            if (this.atirador_atual == 1) this.atirador_atual=2;
+            else this.atirador_atual=1;
+        }
+
+
         if (teclas.left.isDown) {
             jogador.setVelocityX(-(vHorizontal));
             jogador.angle = base_angulo-var_angulo;
@@ -96,7 +109,10 @@ export default class Jogador {
 
 
         if (teclas.space.isDown) {
-            this.atirador.atirar();
+            if (this.atirador_atual==1)
+                this.atirador.atirar();
+            else
+                this.atiradorForte.atirar();
         }
     }
 

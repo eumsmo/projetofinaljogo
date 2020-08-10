@@ -16,6 +16,8 @@ export default class CenaCarregamento extends Phaser.Scene {
         this.load.image("cadeira", "src/img/cadeira.png");
         this.load.image("atirando", "src/img/atirador1.png");
         this.load.image("atirando2", "src/img/atirando2.png");
+
+        this.load.image("tiro-forte", "src/img/tiro_forte.png");
         this.load.image("tiro", "src/img/tiro.png");
 
         this.load.image("garfo", "src/img/garfo.png");

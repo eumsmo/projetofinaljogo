@@ -30,7 +30,6 @@ export class Ataque{
     // Sobreescrever esse método (chamar o super)
     terminar(){
         if(this.terminou) return false;
-        console.log("ssssss");
 
         this._status = 2;
         
@@ -275,8 +274,6 @@ export class GrupoSequencial extends GrupoAtaque{
             this._proximo_ataque = Ataque.parseInformation(this.cena, nome_ataque);
             this.posicao_atual++;
         }
-
-        console.log(this._proximo_ataque);
         return this._proximo_ataque;
     }
 
