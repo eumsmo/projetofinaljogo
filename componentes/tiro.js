@@ -46,6 +46,8 @@ export class Atirador{
         if(this.cooldown) return null;
 
         let {x,y} = this.sprite;
+        x+=this.sprite.sprite.displayWidth / 2 + 12;
+        y-=24;
 
         let tiro = this.grupo.get(x,y);
         tiro.aparecer(true);

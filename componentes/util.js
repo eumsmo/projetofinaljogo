@@ -26,6 +26,9 @@ export function gerenciadorCadastramento() {
             if (typeof cadastro != "object") return false;
             cadastros[nome] = Object.assign({}, cadastro);
             return true;
+        },
+        contem(nome){
+            return nome in cadastros;
         }
     };
 }

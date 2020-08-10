@@ -85,7 +85,7 @@ export class GrupoAtaque extends Ataque{
         
         /* Opções */
         // Cooldown de ataque
-        this.cooldown_ataque = options.cooldown_ataque || null;
+        this.cooldown_ataque = options.cooldown_ataque == undefined ? null : options.cooldown_ataque;
 
         // Condicao de checar
         if(options.cond_termino){
@@ -209,8 +209,11 @@ export class GrupoSequencial extends GrupoAtaque{
     }
 
     comecar(){
-        if(this.tipo == "sequencial aleatorio")
-            this.ordem = GrupoSequencial.gerarVetorOrdem(this.ataques_disponiveis.length-1);
+        if(this.tipo == "sequencial aleatorio"){
+            let chaves = Object.keys(this.ataques_disponiveis);
+            let ordem = GrupoSequencial.gerarVetorOrdem(chaves.length - 1);
+            this.ordem = ordem.map(idx=> chaves[idx]);
+        }
 
         this.posicao_atual = 0;
 

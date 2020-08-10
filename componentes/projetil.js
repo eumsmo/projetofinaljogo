@@ -1,21 +1,20 @@
 import {Movimentos} from "./movimento.js"
+import ValoresDinamicos from "./valores_dinamicos.js";
 
 
 export default class Projetil extends Phaser.Physics.Arcade.Image {
 
-    static parseValoresDinamicos(cena_tam, { x, y, w, h } = {}) {
-        const pre_functions = {
-            largura_tela(tela){return tela.w},
-            altura_tela(tela){return tela.h},
-        };
+    parseValoresDinamicos(valores_obj) {
+        let novo_obj = {};
 
-        [x,y,w,h] = [x,y,w,h].map(val=>{
-            if (val instanceof Function) return val(cena_tam);
-            else if(val in pre_functions) return pre_functions[val](cena_tam);
-            return val;
-        });
+        for(let chave in valores_obj){
+            let val = valores_obj[chave];
+            if (val instanceof Function) novo_obj[chave] = val(this, valores_obj);
+            else if (ValoresDinamicos.contem(val)) novo_obj[chave] = ValoresDinamicos.pegar(val).func(this, valores_obj);
+            else novo_obj[chave]=val;
+        }   
 
-        return { x, y, w, h }
+        return novo_obj;
     }
 
     constructor(cena, x, y, template, info = null ) {
@@ -25,14 +24,16 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
             h: cena.cameras.main.height
         };
 
-        let parsed = Projetil.parseValoresDinamicos(cena_tam, { x, y});
-        let tx = parsed.x;
-        let ty = parsed.y;
+        
 
-        super(cena, tx, ty, template);
+        super(cena, 0, 0, template);
 
         this.cena = cena;
         this.cena_tam = cena_tam;
+
+        let parsed = this.parseValoresDinamicos({ x, y });
+        this.x = parsed.x;
+        this.y = parsed.y;
 
         if(info){
             info = Object.assign({x,y}, info);
@@ -40,11 +41,15 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
         }
     }
 
-    _create({ x, y,  w, h, vida, movimentos } ){
+    get tamanho(){
+        return { w: this.displayWidth, h: this.displayHeight}
+    }
+
+    _create({ x, y,  w, h, vida, movimentos, foraDaTela } ){
         if (w && !h) h = w;
         else if (h && !w) w = h;
 
-        let parsed = Projetil.parseValoresDinamicos(this.cena_tam, {x,y,w,h});
+        let parsed = this.parseValoresDinamicos({x,y,w,h});
         x = parsed.x;
         y = parsed.y;
         w = parsed.w;
@@ -61,12 +66,30 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
         this.y = y;
         this.h = h;
         this.w = w;
-
-        this.tamanho = sprite_tam;
+        this.angle = 0;
+        this.alpha = 1;
 
         if (w || h) {
             const scale = Math.max(sprite_tam.w / this.width, sprite_tam.h / this.height);
             this.setScale(scale);
+        }
+
+
+        
+        const fora_tela_direcoes = {
+            esquerda: sprite => sprite.x < -sprite.tamanho.w / 2,
+            direita: sprite => sprite.x > sprite.cena_tam.w + sprite.tamanho.w / 2,
+            cima: sprite => sprite.y < -sprite.tamanho.h/2,
+            baixo: sprite => sprite.y > sprite.cena_tam.h + sprite.tamanho.h / 2
+        }
+
+        if(foraDaTela){
+            if(foraDaTela == "todas") foraDaTela = Object.keys(fora_tela_direcoes);
+
+            let condicoes = foraDaTela instanceof Array? foraDaTela : [foraDaTela];
+            this.foraDaTelaCondicoes = condicoes.map(key=> fora_tela_direcoes[key]);
+        } else {
+            this.foraDaTelaCondicoes = [fora_tela_direcoes.esquerda];
         }
 
         if (vida) {
@@ -101,7 +124,10 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
     }
 
     foraDaTela() {
-        return this.x < -this.tamanho.w / 2;
+        for (let condicao of this.foraDaTelaCondicoes){
+            if(condicao(this)) return true;
+        }
+        return false;
     }
 
     update() {
@@ -129,6 +155,7 @@ export default class Projetil extends Phaser.Physics.Arcade.Image {
     destruir(){
         this.disableBody(true, true);
         this.setActive(false);
+
         this.emit(Projetil.DESTRUIR_EVENT, this);
     }
 

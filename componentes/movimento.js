@@ -1,4 +1,6 @@
-import {gerenciadorCadastramento} from "./util.js"
+import { gerenciadorCadastramento } from "./util.js"
+import Projetil from "./projetil.js"
+import ValoresDinamicos from "./valores_dinamicos.js"
 
 export const Movimentos = gerenciadorCadastramento();
 
@@ -33,6 +35,43 @@ const senoideLinearParaEsquerda = {
 Movimentos.cadastrar("senoide", senoideLinearParaEsquerda);
 
 
+const simples = {
+    variaveis: {},
+    update(sprite) {
+        const variaveis = this.variaveis;
+        let velocidadeX = variaveis.velocidadeX || 0,
+            velocidadeY = variaveis.velocidadeY || 0;
+
+        sprite.setVelocityX(velocidadeX);
+        sprite.setVelocityY(velocidadeY);
+    }
+}
+
+Movimentos.cadastrar("simples", simples);
+
+
+// Arquivo separado para essa seção
+
+let cache = null;
+
+const salvar = {
+    variaveis: {},
+    create(sprite) {
+        sprite.on(Projetil.DESTRUIR_EVENT, ()=>this.salvar_sprite(sprite));
+    },
+    salvar_sprite(sprite){
+        cache = sprite;
+    }
+}
+
+Movimentos.cadastrar("projetil-cache-ondeath", salvar);
+Movimentos.cadastrar("angle-cache", {create(sprite){sprite.angle=cache? cache.angle : 0}});
+
+ValoresDinamicos.cadastrar("x-cache", {func: () => cache ? cache.x : 0});
+ValoresDinamicos.cadastrar("y-cache", {func: () => cache ? cache.y : 0});
+
+
+
 const praCima = {
     variaveis: {fase: 1},
     update(sprite) {
@@ -57,3 +96,26 @@ const praCima = {
 }
 
 Movimentos.cadastrar("cima", praCima);
+
+const rodando = {
+    create(sprite){
+        const variaveis = this.variaveis;
+        const anguloInicial = variaveis.anguloInicial || 0;
+        sprite.angle=anguloInicial;
+    },
+    update(sprite){
+        const variaveis = this.variaveis;
+        const velocidade = variaveis.velocidade != undefined ? variaveis.velocidade : -1;
+        sprite.angle+=velocidade;
+    }
+}
+
+Movimentos.cadastrar("rodando", rodando);
+
+const gota = {
+    create(sprite) {
+        sprite.alpha = 0.8;
+    }
+}
+
+Movimentos.cadastrar("gota", gota);

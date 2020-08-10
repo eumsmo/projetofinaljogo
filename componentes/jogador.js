@@ -5,18 +5,34 @@ export default class Jogador {
         this.cena = cena;
 
         this.scene_w = this.cena.cameras.main.width;
-        this.scene_h = this.cena.cameras.main.width;
+        this.scene_h = this.cena.cameras.main.height;
 
-        const tam = { w: 96, h: 96 }
+        const tam = { w: 86, h: 86 }
+        const inicial = {x: 128, y: this.scene_h/2};
         this.tam = tam;
-        this.sprite = cena.physics.add.image(0, this.scene_h/2, "cadeira");
+
+
+        this.sprite = cena.physics.add.sprite(inicial.x, inicial.y, "atirando");
         this.sprite.setCollideWorldBounds(true);
-        const scale = Math.max(tam.w / this.sprite.width, tam.h / this.sprite.height);
-        this.sprite.setScale(scale);
+
+        this.cena.anims.create({
+            key: 'atirador',
+            frames: [
+                { key: "atirando" },
+                { key: "atirando2" }
+            ],
+            frameRate: 2,
+            repeat: -1
+        });
+
+        this.sprite.play('atirador');
+
+        //const scale = Math.max(tam.w / this.sprite.width, tam.h / this.sprite.height);
+        this.sprite.setScale(0.33);
 
         this.sprite.allowGravity = false;
 
-        this.atirador = new Atirador(cena, this, 100);
+        this.atirador = new Atirador(cena, this, 150);
 
         this.vida = 3;
         this.dano_cooldown = false;
@@ -26,12 +42,6 @@ export default class Jogador {
         if(this.dano_cooldown) return;
 
         this.vida--;
-        if(this.vida<=0){
-            alert("morte");
-            this.vida=3;
-        } else {
-
-        }
 
         this.dano_cooldown = true;
         let intervalo = setInterval(()=>this._spritePiscando(), 300);
@@ -48,7 +58,7 @@ export default class Jogador {
     }
 
     update(...args){
-
+        
     }
 
     inputTeclado(teclas){
@@ -56,14 +66,21 @@ export default class Jogador {
         const vVertical = 320;
 
         const jogador = this.sprite;
+        const var_angulo = 2.5;
+        const base_angulo = 2;
+
 
         if (teclas.left.isDown) {
             jogador.setVelocityX(-(vHorizontal));
+            jogador.angle = base_angulo-var_angulo;
         }
         else if (teclas.right.isDown) {
             jogador.setVelocityX(vHorizontal);
+            jogador.angle = base_angulo+var_angulo;
+
         } 
         else {
+            jogador.angle = base_angulo;
             jogador.setVelocityX(0);
         }
 
